@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.0.5](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/compare/v2.0.4...v2.0.5) (2024-10-29)
+
+
+### Bug Fixes
+
+* Add debug logs to check endpoint and rename variables ([2e08732](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/commit/2e0873234543e98e63128843bbe5d7b93efca333))
+* update variable name to avoid clash with standard OTEL Env variables (may re-visit in future to use the standards instead) ([b40b291](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/commit/b40b291100f8ada6d80a819c60e04b2c13c00645))
+
 ## [2.0.4](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/compare/v2.0.3...v2.0.4) (2024-10-29)
 
 
