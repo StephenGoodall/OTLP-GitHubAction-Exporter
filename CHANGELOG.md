@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.6](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/compare/v2.0.5...v2.0.6) (2024-10-29)
+
+
+### Bug Fixes
+
+* Update missed variables ([0cd7b4d](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/commit/0cd7b4d2ef4d93bd37039d5ad46919303888bb09))
+
 ## [2.0.5](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/compare/v2.0.4...v2.0.5) (2024-10-29)
 
 
