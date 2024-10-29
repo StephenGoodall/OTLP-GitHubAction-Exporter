@@ -16,31 +16,28 @@ from opentelemetry.sdk.metrics import MeterProvider
 from opentelemetry.sdk.metrics.export import PeriodicExportingMetricReader
 
 def getLogExporter(endpoint, headers, protocol):
-     match protocol:
-        case "HTTP":
-             return HTTPOTLPLogExporter(endpoint=f"{endpoint}v1/logs",headers=headers)
-        case "GRPC":
+     if protocol == 'HTTP':
+        return HTTPOTLPLogExporter(endpoint=f"{endpoint}v1/logs",headers=headers)
+     elif protocol == 'GRPC':
              return GRPCOTLPLogExporter(endpoint=f"{endpoint}v1/logs",headers=headers)
-        case _:
-             return HTTPOTLPLogExporter(endpoint=f"{endpoint}v1/logs",headers=headers)
+     else:
+        return HTTPOTLPLogExporter(endpoint=f"{endpoint}v1/logs",headers=headers)
 
 def getSpanExporter(endpoint, headers, protocol):
-     match protocol:
-        case "HTTP":
-             return HTTPOTLPSpanExporter(endpoint=f"{endpoint}v1/traces",headers=headers)
-        case "GRPC":
-             return GRPCOTLPSpanExporter(endpoint=f"{endpoint}v1/traces",headers=headers)
-        case _:
-             return HTTPOTLPSpanExporter(endpoint=f"{endpoint}v1/traces",headers=headers)
+     if protocol == 'HTTP':
+        return HTTPOTLPSpanExporter(endpoint=f"{endpoint}v1/traces",headers=headers)
+     elif protocol == 'GRPC':
+        return GRPCOTLPSpanExporter(endpoint=f"{endpoint}v1/traces",headers=headers)
+     else:
+        return HTTPOTLPSpanExporter(endpoint=f"{endpoint}v1/traces",headers=headers)
 
 def getMetricExporter(endpoint, headers, protocol):
-     match protocol:
-        case "HTTP":
-             return HTTPOTLPMetricExporter(endpoint=f"{endpoint}v1/metrics",headers=headers)
-        case "GRPC":
-             return GRPCOTLPMetricExporter(endpoint=f"{endpoint}v1/metrics",headers=headers)
-        case _:
-             return HTTPOTLPMetricExporter(endpoint=f"{endpoint}v1/metrics",headers=headers)
+     if protocol == 'HTTP':
+        return HTTPOTLPMetricExporter(endpoint=f"{endpoint}v1/metrics",headers=headers)
+     elif protocol == 'GRPC':
+        return GRPCOTLPMetricExporter(endpoint=f"{endpoint}v1/metrics",headers=headers)
+     else:
+        return HTTPOTLPMetricExporter(endpoint=f"{endpoint}v1/metrics",headers=headers)
 
 def create_otel_attributes(atts, GITHUB_SERVICE_NAME):
     attributes={SERVICE_NAME: GITHUB_SERVICE_NAME}
