@@ -21,7 +21,7 @@ def do_parse(string):
     return string != "" and string is not None and string != "None"
 
 def check_env_vars():
-    keys = ("ACTION_TOKEN","OTEL_EXPORTER_OTEL_ENDPOINT","WORKFLOW_RUN_ID","WORKFLOW_RUN_NAME")
+    keys = ("ACTION_TOKEN","OTEL_EXPORTER_BASE_ENDPOINT","WORKFLOW_RUN_ID","WORKFLOW_RUN_NAME")
     keys_not_set = []
 
     for key in keys:

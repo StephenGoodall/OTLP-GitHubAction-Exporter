@@ -18,7 +18,7 @@ check_env_vars()
 # Configure env variables
 ACTION_TOKEN = os.getenv('ACTION_TOKEN')
 
-OTEL_EXPORTER_OTEL_ENDPOINT = os.getenv('OTEL_EXPORTER_OTEL_ENDPOINT')
+OTEL_EXPORTER_BASE_ENDPOINT = os.getenv('OTEL_EXPORTER_BASE_ENDPOINT')
 OTLP_PROTOCOL = os.getenv('OTLP_PROTOCOL')
 OTEL_EXPORTER_OTLP_HEADERS = os.getenv('OTEL_EXPORTER_OTLP_HEADERS')
 
@@ -84,7 +84,7 @@ if GITHUB_CUSTOM_ATTS != "":
 
 # Set workflow level tracer and logger
 global_resource = Resource(attributes=global_attributes)
-tracer = otel_tracer(OTEL_EXPORTER_OTEL_ENDPOINT, headers, global_resource, "tracer", OTLP_PROTOCOL)
+tracer = otel_tracer(OTEL_EXPORTER_BASE_ENDPOINT, headers, global_resource, "tracer", OTLP_PROTOCOL)
 
 
 # Ensure we don't export data for Dynatrace_OTel_GitHubAction exporter
@@ -149,11 +149,11 @@ for job in job_lst:
                         pass
                 resource_log = Resource(attributes=resource_attributes)
                 
-                step_tracer = otel_tracer(OTEL_EXPORTER_OTEL_ENDPOINT, headers, resource_log, "step_tracer", OTLP_PROTOCOL)
+                step_tracer = otel_tracer(OTEL_EXPORTER_BASE_ENDPOINT, headers, resource_log, "step_tracer", OTLP_PROTOCOL)
                 
                 resource_attributes.update(create_otel_attributes(parse_attributes(step,"","step"),GITHUB_REPOSITORY_NAME))
                 resource_log = Resource(attributes=resource_attributes)
-                job_logger = otel_logger(OTEL_EXPORTER_OTEL_ENDPOINT,headers,resource_log, "job_logger", OTLP_PROTOCOL)
+                job_logger = otel_logger(OTEL_EXPORTER_BASE_ENDPOINT,headers,resource_log, "job_logger", OTLP_PROTOCOL)
 
                 if step['conclusion'] == 'skipped' or step['conclusion'] == 'cancelled':
                     if index >= 1:  

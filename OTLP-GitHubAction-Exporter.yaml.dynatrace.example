@@ -9,7 +9,7 @@ permissions: read-all
 
 env:
   ACTION_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  OTEL_EXPORTER_OTEL_ENDPOINT: https://abc12345.live.dynatrace.com/api/v2/otlp/
+  OTEL_EXPORTER_BASE_ENDPOINT: https://abc12345.live.dynatrace.com/api/v2/otlp/
   OTLP_PROTOCOL: HTTP
   WORKFLOW_RUN_ID: ${{ github.event.workflow_run.id }}
   WORKFLOW_RUN_NAME: ${{ github.event.workflow_run.name }}

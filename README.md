@@ -27,7 +27,7 @@ Also, refer to the Dynatrace Open Telemetry information page:
 
 
 1. Configure your Dynatrace API Token as a secret in your repository, and call it `DYNATRACE_OTEL_API_TOKEN`
-2. Configure your Dynatrace OTLP Endpoint as the `OTEL_EXPORTER_OTEL_ENDPOINT` - eg. "https://abc12345.live.dynatrace.com/api/v2/otlp/"
+2. Configure your Dynatrace OTLP Endpoint as the `OTEL_EXPORTER_BASE_ENDPOINT` - eg. "https://abc12345.live.dynatrace.com/api/v2/otlp/"
 3. Configure your Dynatrace `OTLP_PROTOCOL` as "HTTP" (Optional as HTTP is the default value)
 4. Configure your `OTEL_EXPORTER_OTLP_HEADERS` as `Authorization=Api-Token ${{ secrets.DYNATRACE_OTEL_API_TOKEN }}` to allow it to use the secret from step 1
 5. The exporter uses automatic token authentication by default, for this you need to ensure that `GITHUB_TOKEN` has at least read access to the action scope (see example [Here](OTLP-GitHubAction-Exporter.yaml.dynatrace.example?plain=1#L8)).
@@ -48,7 +48,7 @@ This means it will run whenever any of your other workflows complete - which mea
 ## Required Configuration Options
 **ACTION_TOKEN** - Typically ${{ secrets.GITHUB_TOKEN }} - however a PAT can be used if it has appropriate permissions
 
-**OTEL_EXPORTER_OTEL_ENDPOINT** - This is the base endpoint URL for the OTLP Exporters. See [OpenTelemetry Docs](https://opentelemetry.io/docs/languages/sdk-configuration/otlp-exporter/#otel_exporter_otlp_endpoint)
+**OTEL_EXPORTER_BASE_ENDPOINT** - This is the base endpoint URL for the OTLP Exporters. See [OpenTelemetry Docs](https://opentelemetry.io/docs/languages/sdk-configuration/otlp-exporter/#otel_exporter_otlp_endpoint)
 
 **WORKFLOW_RUN_ID** - This contains the Workflow Run ID for the workflow that triggered this Workflow (ensure it is using the github.event context)
 
