@@ -49,7 +49,7 @@ def create_otel_attributes(atts, GITHUB_SERVICE_NAME):
     return attributes
 
 def otel_logger(otlp_endpoint, headers, resource, name, export_protocol):
-    exporter = getLogExporter(endpoint=f"{otlp_endpoint}v1/logs",headers=headers, protocol=export_protocol )
+    exporter = getLogExporter(otlp_endpoint=f"{otlp_endpoint}v1/logs",headers=headers, protocol=export_protocol )
     logger = logging.getLogger(str(name))
     logger.handlers.clear()
     logger_provider = LoggerProvider(resource=resource)
@@ -60,7 +60,7 @@ def otel_logger(otlp_endpoint, headers, resource, name, export_protocol):
 
 
 def otel_tracer(otlp_endpoint, headers, resource, tracer, export_protocol):
-    processor = BatchSpanProcessor(getSpanExporter(endpoint=f"{otlp_endpoint}v1/traces",headers=headers, protocol=export_protocol ))
+    processor = BatchSpanProcessor(getSpanExporter(otlp_endpoint=f"{otlp_endpoint}v1/traces",headers=headers, protocol=export_protocol ))
     tracer = TracerProvider(resource=resource)
     tracer.add_span_processor(processor)
     tracer = trace.get_tracer(__name__, tracer_provider=tracer)
@@ -68,7 +68,7 @@ def otel_tracer(otlp_endpoint, headers, resource, tracer, export_protocol):
     return tracer
 
 def otel_meter(otlp_endpoint, headers, resource, meter, export_protocol):
-    reader = PeriodicExportingMetricReader(getMetricExporter(endpoint=f"{otlp_endpoint}v1/metrics",headers=headers, protocol=export_protocol ))
+    reader = PeriodicExportingMetricReader(getMetricExporter(otlp_endpoint=f"{otlp_endpoint}v1/metrics",headers=headers, protocol=export_protocol ))
     provider = MeterProvider(resource=resource, metric_readers=[reader])
     meter = metrics.get_meter(__name__,meter_provider=provider)
     return meter
