@@ -15,29 +15,32 @@ from opentelemetry.sdk._logs.export import BatchLogRecordProcessor
 from opentelemetry.sdk.metrics import MeterProvider
 from opentelemetry.sdk.metrics.export import PeriodicExportingMetricReader
 
-def getLogExporter(endpoint, headers, protocol):
+def getLogExporter(otlp_endpoint, headers, protocol):
+     print(f"Using: {otlp_endpoint}v1/logs")
      if protocol == 'HTTP':
-        return HTTPOTLPLogExporter(endpoint=f"{endpoint}v1/logs",headers=headers)
+        return HTTPOTLPLogExporter(endpoint=f"{otlp_endpoint}v1/logs",headers=headers)
      elif protocol == 'GRPC':
-             return GRPCOTLPLogExporter(endpoint=f"{endpoint}v1/logs",headers=headers)
+             return GRPCOTLPLogExporter(endpoint=f"{otlp_endpoint}v1/logs",headers=headers)
      else:
-        return HTTPOTLPLogExporter(endpoint=f"{endpoint}v1/logs",headers=headers)
+        return HTTPOTLPLogExporter(endpoint=f"{otlp_endpoint}v1/logs",headers=headers)
 
-def getSpanExporter(endpoint, headers, protocol):
+def getSpanExporter(otlp_endpoint, headers, protocol):
+     print(f"Using: {otlp_endpoint}v1/traces")
      if protocol == 'HTTP':
-        return HTTPOTLPSpanExporter(endpoint=f"{endpoint}v1/traces",headers=headers)
+        return HTTPOTLPSpanExporter(endpoint=f"{otlp_endpoint}v1/traces",headers=headers)
      elif protocol == 'GRPC':
-        return GRPCOTLPSpanExporter(endpoint=f"{endpoint}v1/traces",headers=headers)
+        return GRPCOTLPSpanExporter(endpoint=f"{otlp_endpoint}v1/traces",headers=headers)
      else:
-        return HTTPOTLPSpanExporter(endpoint=f"{endpoint}v1/traces",headers=headers)
+        return HTTPOTLPSpanExporter(endpoint=f"{otlp_endpoint}v1/traces",headers=headers)
 
-def getMetricExporter(endpoint, headers, protocol):
+def getMetricExporter(otlp_endpoint, headers, protocol):
+     print(f"Using: {otlp_endpoint}v1/metrics")
      if protocol == 'HTTP':
-        return HTTPOTLPMetricExporter(endpoint=f"{endpoint}v1/metrics",headers=headers)
+        return HTTPOTLPMetricExporter(endpoint=f"{otlp_endpoint}v1/metrics",headers=headers)
      elif protocol == 'GRPC':
-        return GRPCOTLPMetricExporter(endpoint=f"{endpoint}v1/metrics",headers=headers)
+        return GRPCOTLPMetricExporter(endpoint=f"{otlp_endpoint}v1/metrics",headers=headers)
      else:
-        return HTTPOTLPMetricExporter(endpoint=f"{endpoint}v1/metrics",headers=headers)
+        return HTTPOTLPMetricExporter(endpoint=f"{otlp_endpoint}v1/metrics",headers=headers)
 
 def create_otel_attributes(atts, GITHUB_SERVICE_NAME):
     attributes={SERVICE_NAME: GITHUB_SERVICE_NAME}
@@ -45,8 +48,8 @@ def create_otel_attributes(atts, GITHUB_SERVICE_NAME):
             attributes[att]=atts[att]
     return attributes
 
-def otel_logger(endpoint, headers, resource, name, export_protocol):
-    exporter = getLogExporter(endpoint=f"{endpoint}v1/logs",headers=headers, protocol=export_protocol )
+def otel_logger(otlp_endpoint, headers, resource, name, export_protocol):
+    exporter = getLogExporter(endpoint=f"{otlp_endpoint}v1/logs",headers=headers, protocol=export_protocol )
     logger = logging.getLogger(str(name))
     logger.handlers.clear()
     logger_provider = LoggerProvider(resource=resource)
@@ -56,16 +59,16 @@ def otel_logger(endpoint, headers, resource, name, export_protocol):
     return logger
 
 
-def otel_tracer(endpoint, headers, resource, tracer, export_protocol):
-    processor = BatchSpanProcessor(getSpanExporter(endpoint=f"{endpoint}v1/traces",headers=headers, protocol=export_protocol ))
+def otel_tracer(otlp_endpoint, headers, resource, tracer, export_protocol):
+    processor = BatchSpanProcessor(getSpanExporter(endpoint=f"{otlp_endpoint}v1/traces",headers=headers, protocol=export_protocol ))
     tracer = TracerProvider(resource=resource)
     tracer.add_span_processor(processor)
     tracer = trace.get_tracer(__name__, tracer_provider=tracer)
 
     return tracer
 
-def otel_meter(endpoint, headers, resource, meter, export_protocol):
-    reader = PeriodicExportingMetricReader(getMetricExporter(endpoint=f"{endpoint}v1/metrics",headers=headers, protocol=export_protocol ))
+def otel_meter(otlp_endpoint, headers, resource, meter, export_protocol):
+    reader = PeriodicExportingMetricReader(getMetricExporter(endpoint=f"{otlp_endpoint}v1/metrics",headers=headers, protocol=export_protocol ))
     provider = MeterProvider(resource=resource, metric_readers=[reader])
     meter = metrics.get_meter(__name__,meter_provider=provider)
     return meter
