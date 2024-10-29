@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.4](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/compare/v2.0.3...v2.0.4) (2024-10-29)
+
+
+### Bug Fixes
+
+* Replace switch with if elif ([c67442f](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/commit/c67442f5e33ec00d622c75c37c762d4adb8e5df6))
+
 ## [2.0.3](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/compare/v2.0.2...v2.0.3) (2024-10-29)
 
 
