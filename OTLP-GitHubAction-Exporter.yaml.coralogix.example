@@ -1,0 +1,34 @@
+name: OpenTelemetry - Export OTel Metrics Traces and Logs to Coralogix
+
+on:
+  workflow_run:
+    workflows: ['*']
+    types: [completed]
+
+permissions: read-all
+
+env:
+  # Plugin settings
+  GITHUB_DEBUG: false # Set to true for troubleshooting
+  ACTION_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  WORKFLOW_RUN_ID: ${{ github.event.workflow_run.id }}
+  WORKFLOW_RUN_NAME: ${{ github.event.workflow_run.name }}
+  # CX endpoint settings
+  OTLP_PROTOCOL: HTTP
+  # Change to your region's endpoint (https://coralogix.com/docs/integrations/coralogix-endpoints/)
+  OTEL_EXPORTER_OTLP_ENDPOINT: https://ingress.eu2.coralogix.com/ 
+  OTEL_EXPORTER_OTLP_HEADERS: Authorization=Bearer ${{ secrets.CORALOGIX_API_KEY }}
+  GITHUB_CUSTOM_ATTS: '{"cx.application.name":"github", "cx.subsystem.name":"actions"}'
+  # You can override service.name or make subsystem dynamic
+  # GITHUB_CUSTOM_ATTS: '{"service.name":"ghapp", "cx.application.name":"ghactions", "cx.subsystem.name":${{ github.repository }}}'
+
+jobs:
+  Coralogix-GitHubAction-Exporter:
+    name: Coralogix GitHubAction Exporter
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Run Coralogix GitHubAction Exporter
+        uses: coralogix/OTLP-GitHubAction-Exporter@v3

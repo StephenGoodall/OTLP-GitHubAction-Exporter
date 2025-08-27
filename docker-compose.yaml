@@ -1,9 +1,9 @@
 version: '3.9'
 services:
-  dynatrace-otel-exporter:
+  coralogix-otel-exporter:
     platform: linux/amd64
     environment:
       - VERSION=$VERSION
     build:
       context: ./
-    image: ghcr.io/StephenGoodall/OTLP-GitHubAction-Exporter:$VERSION
+    image: ghcr.io/coralogix/OTLP-GitHubAction-Exporter:$VERSION
