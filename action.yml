@@ -1,5 +1,5 @@
 # action.yml
-name: OTLP GitHubAction Exporter
+name: OTLP Exporter
 description: Exports Workflow Run Telemetry as OTel (OpenTelemetry) traces with logs in context over OTLP
 author: Coralogix
 
