@@ -22,6 +22,7 @@ This will require the following permissions:
 - logs.ingest
 - metrics.ingest
 
+
 Also, refer to the Dynatrace Open Telemetry information page:
 [Using OpenTelemetry with Dynatrace](https://docs.dynatrace.com/docs/get-started/opentelemetry)
 
