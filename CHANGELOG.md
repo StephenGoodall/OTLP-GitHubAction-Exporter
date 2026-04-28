@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.7](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/compare/v3.2.6...v3.2.7) (2026-04-28)
+
+
+### Bug Fixes
+
+* update checkout version in actions ([2ed48c1](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/commit/2ed48c15e3c8de75d2cab01c3233401a92f08200))
+
 ## [3.2.6](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/compare/v3.2.5...v3.2.6) (2026-04-28)
 
 
