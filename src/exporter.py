@@ -68,7 +68,26 @@ api = GhApi(owner=GITHUB_REPOSITORY_OWNER, repo=GITHUB_REPOSITORY_NAME.split('/'
 
 # Github API calls
 get_workflow_run_by_run_id = do_fastcore_decode(api.actions.get_workflow_run(WORKFLOW_RUN_ID))
-get_workflow_run_jobs_by_run_id = do_fastcore_decode(api.actions.list_jobs_for_workflow_run(WORKFLOW_RUN_ID))
+
+# Page through all jobs. GitHub paginates the list-jobs endpoint at 30 per
+# page by default, so any workflow with more than 30 jobs would silently
+# drop everything past the first page (including failures and post-deploy
+# validation jobs). per_page=100 is the GitHub maximum.
+all_jobs = []
+last_page = None
+page_num = 1
+while True:
+    page_resp = do_fastcore_decode(api.actions.list_jobs_for_workflow_run(WORKFLOW_RUN_ID, per_page=100, page=page_num))
+    last_page = json.loads(page_resp)
+    page_jobs = last_page.get("jobs", [])
+    all_jobs.extend(page_jobs)
+    if len(page_jobs) < 100:
+        break
+    page_num += 1
+get_workflow_run_jobs_by_run_id = json.dumps({
+    "jobs": all_jobs,
+    "total_count": last_page.get("total_count", len(all_jobs)) if last_page else 0,
+})
 
 # Set OTEL resources
 global_attributes={
