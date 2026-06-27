@@ -1,5 +1,5 @@
 opentelemetry.api
-opentelemetry.sdk>=1.41.1
+opentelemetry.sdk>=1.42.1
 opentelemetry.exporter.otlp.proto.grpc
 opentelemetry.exporter.otlp.proto.http
 opentelemetry.instrumentation.logging
