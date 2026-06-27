@@ -1,5 +1,14 @@
 # Changelog
 
+## [3.2.8](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/compare/v3.2.7...v3.2.8) (2026-06-27)
+
+
+### Bug Fixes
+
+* Merge pull request [#38](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/issues/38) from gangadhar-res/fix/paginate-workflow-jobs ([dbbc960](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/commit/dbbc960e24998780d0ab4746789463c117a92ee4))
+* paginate workflow jobs to capture all jobs in large runs ([dbbc960](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/commit/dbbc960e24998780d0ab4746789463c117a92ee4))
+* paginate workflow jobs to capture all jobs in large runs ([783aa55](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/commit/783aa55a2ac91590a82a7873c5c588f5e275635c))
+
 ## [3.2.7](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/compare/v3.2.6...v3.2.7) (2026-04-28)
 
 
