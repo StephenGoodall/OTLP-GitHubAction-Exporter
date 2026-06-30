@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.9](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/compare/v3.2.8...v3.2.9) (2026-06-30)
+
+
+### Bug Fixes
+
+* push to force release for update to OTel version ([f97835a](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/commit/f97835add9a620117d439a3a2f3233ee42a28e2d))
+
 ## [3.2.8](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/compare/v3.2.7...v3.2.8) (2026-06-27)
 
 
