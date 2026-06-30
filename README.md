@@ -5,6 +5,7 @@
 A GitHub Action to export Workflow runs as OTel Traces, Metric and Logs via OTLP.
 
 
+
 ## Monitoring Github Actions with OTLP
 This action will allow you to monitor your Github Actions with OpenTelemetry.
 This Action works as an exporter, that will create OpenTelemetry Traces and Spans for the steps within your GitHub Workflows.
