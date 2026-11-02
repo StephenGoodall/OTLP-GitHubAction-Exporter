@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.13](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/compare/v3.2.12...v3.2.13) (2026-11-02)
+
+
+### Bug Fixes
+
+* **deps:** update opentelemetry-sdk requirement ([#49](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/issues/49)) ([4206706](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/commit/4206706783ddc43963eeeee8c17d0dc5592d2546))
+
 ## [3.2.12](https://github.com/StephenGoodall/OTLP-GitHubAction-Exporter/compare/v3.2.11...v3.2.12) (2026-10-18)
 
 
